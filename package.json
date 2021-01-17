@@ -1,0 +1,11 @@
+{
+  "name": "ImmutableJs2Ramda",
+  "version": "0.1",
+  "main": "index.ts",
+  "author": "Lucas Rangel",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "recast": "^0.20.4"
+  }
+}
