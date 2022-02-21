@@ -13,8 +13,8 @@ const transformers: types.Visitor = {
       transformersMap[functionCallName](path)
     }
 
-    if (['fromJS', 'toJS', 'fromArray'].includes(path.value.callee.name)) {
-      removeCaller(path)
+    if (['fromJS', 'toJS', 'fromArray'].includes(path.value?.callee?.name)) {
+      unwrapCaller(path)
     }
     this.traverse(path)
   },
@@ -55,12 +55,9 @@ const callerAsLastArg = (newFn: string) => (path: FunctionCall) => {
   //@ts-ignore
   path.replace(callExpression(identifier(newFn), [...args, obj]))
 }
-const removeCaller = (path: FunctionCall) => {
+const unwrapCaller = (path: FunctionCall) => {
   //@ts-ignore
-  const obj = path.node.callee.object
-  const args = path.node.arguments
-  //@ts-ignore
-  path.replace(args[0])
+  path.replace(path.node.arguments[0])
 }
 
 const transformersMap = {
@@ -74,9 +71,15 @@ const transformersMap = {
   zip: callerAsLastArg('zip'),
   // push: callerAsLastArg('append'),
   updateIn: callerAsLastArg('modifyPath'),
-  fromJS: removeCaller,
-  toJS: removeCaller,
-  fromArray: removeCaller,
+  groupBy: callerAsLastArg('groupBy'),
+  flatMap: callerAsLastArg('chain'),
+  // fromJS: unwrapCaller,
+  toJS: (path: FunctionCall) => {
+    //@ts-ignore
+    path.replace(path.node.callee.object)
+  },
+  // fromArray: unwrapCaller,
+  Map: equalArity('fromPairs'),
 }
 
 //TODO: manipulate parent
