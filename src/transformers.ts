@@ -2,7 +2,7 @@ import {types} from 'recast'
 import {NodePath} from 'ast-types/lib/node-path'
 
 const b = types.builders
-const {identifier, stringLiteral, callExpression} = types.builders
+const {identifier, stringLiteral, callExpression, memberExpression} = types.builders
 
 type FunctionCall = NodePath<types.namedTypes.CallExpression>
 
@@ -27,6 +27,7 @@ const getter =
   (newFn: string, isGetter = true) =>
   (path: FunctionCall) => {
     const args = path.node.arguments
+    const [propName] = args
     //@ts-ignore
     const obj = path.node.callee.object
     //TODO: use dot notation if arg for get(p)
@@ -35,7 +36,12 @@ const getter =
     const functionName = identifier(newFn + (hasDefaultValue ? 'Or' : ''))
     const newArgs = hasDefaultValue ? args.reverse() : args
 
-    path.replace(callExpression(functionName, [...newArgs, obj]))
+    const expr =
+      propName.type === 'StringLiteral'
+        ? memberExpression(obj, identifier(propName.value))
+        : callExpression(functionName, [...newArgs, obj])
+
+    path.replace(expr)
   }
 const equalArity = (newFn: string) => (path: FunctionCall) => {
   const args = path.node.arguments
