@@ -24,8 +24,7 @@ codeAssertion('simple set', 'originalList.set(key, 2)', 'assoc(key, 2, originalL
 codeAssertion('fromJS', 'fromJS(x)', 'x')
 codeAssertion('fromArray', 'fromArray(x)', 'x')
 codeAssertion('toJS', 'x.toJS()', 'x')
-// codeAssertion('fromJS', 'x.toJS()', 'x');
-//
+
 codeAssertion('updateIn', 'x.updateIn(path, fn)', 'modifyPath(path, fn, x)')
 codeAssertion('flatten', 'x.flatten()', 'flatten(x)')
 
@@ -35,7 +34,18 @@ codeAssertion('zip', 'x.zip(p)', 'zip(p, x)')
 codeAssertion('groupBy', 'x.groupBy(f)', 'groupBy(f, x)')
 // codeAssertion('Map', 'Map(x)', 'fromPairs(x)')
 codeAssertion('flatMap', 'x.flatMap(f)', 'chain(f, x)')
-// codeAssertion('push', 'x.push(y)', 'append(y, x)')
+codeAssertion('isEmpty', 'x.isEmpty()', 'isEmpty(x)')
+codeAssertion('flip', 'x.flip()', 'invertObj(x)')
 
 // TODO: mergeIn,
-// isEmpty, FlatMap
+// isEmpty
+// merge
+// sortBy
+// findlast
+// deleteIn
+// valueSeq
+// indexOf
+//
+// toOrderedSet
+// toSet
+// contains
