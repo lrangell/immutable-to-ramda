@@ -1,13 +1,13 @@
-import {fromPairs} from 'ramda';
-import {NodePath} from 'ast-types/lib/node-path';
-import {ExpressionKind} from 'ast-types/gen/kinds';
-import {namedTypes} from 'ast-types/gen/namedTypes';
-import {parse, print, visit} from 'recast';
-import transformers, {importTransformer} from './transformers';
-import {promises} from 'fs';
-import {diffLines} from 'diff';
-import {parseSync} from '@babel/core';
-import chalk = require('chalk');
+import { fromPairs } from 'ramda';
+import { NodePath } from 'ast-types/lib/node-path';
+import { ExpressionKind } from 'ast-types/gen/kinds';
+import { namedTypes } from 'ast-types/gen/namedTypes';
+import { parse, print, visit } from 'recast';
+import transformers, { importTransformer } from './transformers';
+import { promises } from 'fs';
+import { diffLines } from 'diff';
+import { parseSync } from '@babel/core';
+import chalk from 'chalk';
 import signale from 'signale';
 
 export type FunctionCall = {
@@ -22,13 +22,16 @@ type GetTransformation = (arg: string) => Transformation;
 type ImmutableToRamdaMap = Record<ImmutableFunctionName, RamdaFunctionName>;
 export type TransformationMap = Record<
   ImmutableFunctionName,
-  {ramdaFn: RamdaFunctionName; transformation: Transformation}
+  { ramdaFn: RamdaFunctionName; transformation: Transformation }
 >;
-export const nameAndTransform = (ts: GetTransformation, immutableRamdamap: ImmutableToRamdaMap) =>
+export const nameAndTransform = (
+  ts: GetTransformation,
+  immutableRamdamap: ImmutableToRamdaMap
+) =>
   fromPairs(
     Object.entries(immutableRamdamap).map(([immutableFn, ramdaFn]) => [
       immutableFn,
-      {ramdaFn, transformation: ts(ramdaFn)}
+      { ramdaFn, transformation: ts(ramdaFn) },
     ])
   );
 
@@ -39,35 +42,38 @@ const parseFile = async (path: string) =>
       src,
       ast: parse(src, {
         parser: {
-          parse: (source) =>
+          parse: (source: string) =>
             parseSync(source, {
-              plugins: [[`@babel/plugin-syntax-typescript`, {isTSX: true}]],
+              plugins: [[`@babel/plugin-syntax-typescript`, { isTSX: true }]],
               overrides: [
                 {
                   test: [`**/*.ts`, `**/*.tsx`],
-                  plugins: [[`@babel/plugin-syntax-typescript`, {isTSX: true}]]
-                }
+                  plugins: [
+                    [`@babel/plugin-syntax-typescript`, { isTSX: true }],
+                  ],
+                },
               ],
               filename: path,
               parserOpts: {
-                tokens: true
-              }
-            })
-        }
-      })
+                tokens: true,
+              },
+            }),
+        },
+      }),
     }))
-    .catch((err) => {
-      signale.erorr(`unable to parse ${path}`);
+    .catch((err: any) => {
+      signale.error(`unable to parse ${path}`);
+      signale.error(err);
     });
 
 const transformSource = async (path: string) => {
   const code = await parseFile(path);
   if (!code) return;
-  const {src, ast} = code;
+  const { src, ast } = code;
   visit(ast, transformers);
   visit(ast, importTransformer);
   const newSrc = print(ast).code;
-  return src === newSrc ? false : {src, newSrc};
+  return src === newSrc ? false : { src, newSrc };
 };
 
 export const printDiff = async (path: string) => {

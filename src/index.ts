@@ -1,5 +1,5 @@
-import {program} from 'commander';
-import {printDiff, rewriteSource} from './utils';
+import { program } from 'commander';
+import { printDiff, rewriteSource } from './utils';
 
 program.option('--dry');
 const args = program.parse(process.argv);
