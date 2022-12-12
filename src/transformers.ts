@@ -50,7 +50,7 @@ const transformers: types.Visitor = {
 
 export const importTransformer: types.Visitor = {
   visitImportDeclaration: function (path) {
-    addImport(path, 'fome');
+    addImport(path);
     this.traverse(path);
   }
 };

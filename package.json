@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "test": "ava tests.ts",
-    "transform": "ts-node src/cli.ts",
+    "transform": "ts-node src/index.ts",
     "lint": "yarn eslint -c .eslintrc.js src/**/*.ts"
   },
   "private": true,
@@ -16,13 +16,14 @@
     "@babel/plugin-syntax-typescript": "^7.16.7",
     "@babel/plugin-transform-typescript": "^7.16.8",
     "babylon": "^7.0.0-beta.47",
-    "colors": "^1.4.0",
+    "chalk": "4.1.2",
     "commander": "^9.0.0",
     "diff": "^5.0.0",
     "globby": "^13.1.1",
     "immutable": "^4.0.0",
     "ramda": "^0.28.0",
-    "recast": "^0.22.0"
+    "recast": "^0.22.0",
+    "signale": "^1.4.0"
   },
   "devDependencies": {
     "@types/babel-core": "^6.25.7",

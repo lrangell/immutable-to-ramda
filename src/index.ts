@@ -1,8 +1,7 @@
-import {run, visit} from 'recast'
-import transformers from './transformers'
+import {program} from 'commander';
+import {printDiff, rewriteSource} from './utils';
 
-run(function(ast, callback) {
-  visit(ast, transformers);
-  callback(ast)
-})
+program.option('--dry');
+const args = program.parse(process.argv);
 
+args.args.forEach(program.opts().dry ? printDiff : rewriteSource);
