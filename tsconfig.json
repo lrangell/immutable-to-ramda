@@ -1,11 +1,16 @@
 {
   "compilerOptions,": {
-    "target,": "es2016",
+    "target,": "ESNext",
     "module": "commonjs",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true,
-    "lib": ["node"]
+    "lib": ["node", "ES2021"],
+    "importHelpers": true,
+    "declaration": true,
+    "sourceMap": true,
+    "rootDir": "./src",
+    "outDir": "dist"
   }
 }

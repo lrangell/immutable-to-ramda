@@ -1,5 +1,5 @@
 {
-  "name": "ImmutableJs2Ramda",
+  "name": "immutable-to-ramda",
   "main": "index.ts",
   "author": "Lucas Rangel",
   "license": "MIT",
@@ -32,7 +32,7 @@
     "@types/eslint": "^8.4.1",
     "@types/eslint-config-prettier": "^6.11.0",
     "@types/eslint-plugin-prettier": "^3.1.0",
-    "@types/node": "^17.0.19",
+    "@types/node": "^18.11.13",
     "@types/prettier": "^2.4.4",
     "@types/ramda": "^0.27.64",
     "@typescript-eslint/eslint-plugin": "^5.9.1",
