@@ -12,7 +12,7 @@
     "node": ">=16"
   },
   "bin": {
-    "immutable-to-ramda": "./dist/immutable-to-ramda.cjs.production.min.js"
+    "immutable-to-ramda": "./dist/index.js"
   },
   "scripts": {
     "start": "tsdx watch",
