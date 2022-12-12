@@ -11,6 +11,9 @@
   "engines": {
     "node": ">=16"
   },
+  "bin": {
+    "immutable-to-ramda": "./dist/immutable-to-ramda.cjs.production.min.js"
+  },
   "scripts": {
     "start": "tsdx watch",
     "build": "tsdx build",
