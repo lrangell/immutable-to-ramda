@@ -1,8 +1,13 @@
 import { types } from 'recast';
 import { NodePath } from 'ast-types/lib/node-path';
 import { namedTypes } from 'ast-types/gen/namedTypes';
-import { pluck, propEq, isEmpty, difference } from 'ramda';
-import { FunctionCall, nameAndTransform, TransformationMap } from './utils';
+import { pluck, propEq, isEmpty, difference, fromPairs } from 'ramda';
+import {
+  FunctionCall,
+  GetTransformation,
+  ImmutableToRamdaMap,
+  TransformationMap,
+} from './types';
 // TODO: handle empty List(), Map()
 // TODO: handle space in literal string on get
 
@@ -96,9 +101,11 @@ const getIn = ({ path, args, callee }: FunctionCall) => {
     return;
   }
 
+  const { elements } = propsArray;
+
   const expr =
-    propsArray.type === 'ArrayExpression' && allLiteral(propsArray.elements)
-      ? pluck('value', propsArray.elements)
+    propsArray.type === 'ArrayExpression' && allLiteral(elements)
+      ? pluck('value', elements)
           .map(identifier)
           .reduce(
             (acc, curr) =>
@@ -135,6 +142,17 @@ const unwrapCaller = ({ path, callee, args }: FunctionCall) => {
     : args[0];
   path.replace(expr);
 };
+
+export const nameAndTransform = (
+  ts: GetTransformation,
+  immutableRamdamap: ImmutableToRamdaMap
+) =>
+  fromPairs(
+    Object.entries(immutableRamdamap).map(([immutableFn, ramdaFn]) => [
+      immutableFn,
+      { ramdaFn, transformation: ts(ramdaFn) },
+    ])
+  );
 
 const transformersMap: TransformationMap = {
   ...nameAndTransform(callerAsLastArg, {

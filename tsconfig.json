@@ -1,7 +1,6 @@
 {
   "include": ["src", "types"],
   "compilerOptions": {
-    "module": "esnext",
     "lib": ["dom", "esnext"],
     "importHelpers": true,
     "declaration": true,
@@ -12,10 +11,17 @@
     "noFallthroughCasesInSwitch": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "moduleResolution": "node",
-    "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "noEmit": true
-  }
+    "noEmit": true,
+    "module": "ESNext",
+    "esModuleInterop": true,
+    "target": "ESNext",
+    "moduleResolution": "Node"
+  },
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node"
+  },
+  "lib": ["esnext"]
 }
