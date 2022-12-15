@@ -12,12 +12,12 @@
     "node": ">=16"
   },
   "bin": {
-    "immutable-to-ramda": "./dist/immutable-to-ramda.esm.js"
+    "immutable-to-ramda": "./bin.js"
   },
   "scripts": {
-    "start": "tsdx watch",
+    "start": "tsdx watch --target node",
     "transform": "ts-node ./src/index.ts",
-    "build": "tsdx build",
+    "build": "tsdx build --target node",
     "test": "tsdx test",
     "lint": "tsdx lint",
     "prepare": "tsdx build",
