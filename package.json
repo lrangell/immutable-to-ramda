@@ -1,7 +1,7 @@
 {
   "version": "0.8.0",
   "license": "MIT",
-  "main": "dist/index.js",
+  "main": "./dist/immutable-to-ramda.esm.js",
   "typings": "dist/index.d.ts",
   "files": [
     "dist",
@@ -23,7 +23,6 @@
     "size": "size-limit",
     "analyze": "size-limit --why"
   },
-  "peerDependencies": {},
   "husky": {
     "hooks": {
       "pre-commit": "tsdx lint"
