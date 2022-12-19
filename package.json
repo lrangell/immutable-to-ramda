@@ -1,7 +1,7 @@
 {
   "version": "0.12.0",
   "license": "MIT",
-  "main": "./dist/index.js",
+  "main": "./bin.js",
   "typings": "dist/index.d.ts",
   "files": [
     "dist",
@@ -11,9 +11,10 @@
     "node": ">=16"
   },
   "bin": {
-    "immutable-to-ramda": "./dist/index.js"
+    "immutable-to-ramda": "./bin.js"
   },
   "scripts": {
+    "build": "esbuild --bundle --minify --platform=node --target=node16 ./src/index.ts --outdir=./dist",
     "prepare": "ls"
   },
   "husky": {
@@ -27,19 +28,15 @@
   },
   "name": "immutable-to-ramda",
   "author": "Lucas Rangel",
-  "module": "dist/immutable-to-ramda.esm.js",
   "dependencies": {
     "@babel/core": "^7.17.5",
-    "@babel/plugin-proposal-class-properties": "^7.16.7",
     "@babel/plugin-syntax-jsx": "^7.16.7",
     "@babel/plugin-syntax-typescript": "^7.16.7",
     "@babel/plugin-transform-typescript": "^7.16.8",
-    "babylon": "^7.0.0-beta.47",
     "chalk": "4.1.2",
     "commander": "^9.4.1",
     "diff": "^5.0.0",
     "globby": "^13.1.1",
-    "immutable": "^4.0.0",
     "ramda": "^0.28.0",
     "recast": "^0.22.0",
     "signale": "^1.4.0"

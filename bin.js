@@ -1,2 +1,2 @@
 #!/usr/bin/env node
-require('immutable-to-ramda');
+require('./dist/index.js');

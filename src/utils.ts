@@ -15,12 +15,17 @@ const parseFile = async (path: string) =>
         parser: {
           parse: (source: string) =>
             parseSync(source, {
-              plugins: [[`@babel/plugin-syntax-typescript`, { isTSX: true }]],
+              plugins: [
+                [require(`@babel/plugin-syntax-typescript`), { isTSX: true }],
+              ],
               overrides: [
                 {
                   test: [`**/*.ts`, `**/*.tsx`],
                   plugins: [
-                    [`@babel/plugin-syntax-typescript`, { isTSX: true }],
+                    [
+                      require(`@babel/plugin-syntax-typescript`),
+                      { isTSX: true },
+                    ],
                   ],
                 },
               ],
