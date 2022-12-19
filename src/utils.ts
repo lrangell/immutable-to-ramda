@@ -2,6 +2,7 @@ import { parse, print, visit } from 'recast';
 import transformers, { importTransformer } from './transformers';
 import { promises } from 'fs';
 import { diffLines } from 'diff';
+//@ts-ignore
 import { parseSync } from '@babel/core';
 import chalk from 'chalk';
 import signale from 'signale';
