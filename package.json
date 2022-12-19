@@ -1,7 +1,7 @@
 {
   "version": "0.11.0",
   "license": "MIT",
-  "main": "./dist/immutable-to-ramda.esm.js",
+  "main": "./dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [
     "dist",
@@ -11,7 +11,7 @@
     "node": ">=16"
   },
   "bin": {
-    "immutable-to-ramda": "./bin.js"
+    "immutable-to-ramda": "./dist/index.js"
   },
   "scripts": {
     "prepare": "ls"
