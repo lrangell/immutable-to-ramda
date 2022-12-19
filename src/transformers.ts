@@ -101,6 +101,7 @@ const getIn = ({ path, args, callee }: FunctionCall) => {
     return;
   }
 
+  //@ts-ignore
   const { elements } = propsArray;
 
   const expr =

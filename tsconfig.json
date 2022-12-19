@@ -14,10 +14,9 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
-    "module": "ESNext",
     "esModuleInterop": true,
     "target": "ESNext",
-    "moduleResolution": "Node"
+    "moduleResolution": "node"
   },
   "ts-node": {
     "esm": true,

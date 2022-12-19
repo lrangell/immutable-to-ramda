@@ -1,3 +1,7 @@
+import { namedTypes } from 'ast-types/gen/namedTypes';
+import { ExpressionKind } from 'ast-types/gen/kinds';
+import { NodePath } from 'ast-types/lib/node-path';
+
 export type FunctionCall = {
   path: NodePath<namedTypes.CallExpression>;
   callee: ExpressionKind;
